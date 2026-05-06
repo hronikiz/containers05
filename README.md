@@ -33,7 +33,7 @@
 
 ## 1. Создание проекта
 
-```bash
+bash
 mkdir containers05
 cd containers05
 
