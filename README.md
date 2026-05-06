@@ -33,112 +33,112 @@
 
 ## 1. Создание проекта
 
-bash
 mkdir containers05
 cd containers05
 
 📌 Создана директория проекта.
 
-2. Создание Dockerfile
+---
+
+## 2. Создание Dockerfile
+
 FROM debian:latest
 
 RUN apt-get update && \
-    apt-get install -y apache2 php libapache2-mod-php php-mysql mariadb-server supervisor curl && \
-    apt-get clean
+apt-get install -y apache2 php libapache2-mod-php php-mysql mariadb-server supervisor curl && \
+apt-get clean
 
 📌 Установлены:
+- Apache2  
+- PHP  
+- MariaDB  
+- Supervisor  
+- curl  
 
-Apache2
-PHP
-MariaDB
-Supervisor
-curl
-3. Сборка Docker-образа
+---
+
+## 3. Сборка Docker-образа
+
 docker build -t apache2-php-mariadb .
 
 📌 Создан Docker-образ.
 
-4. Запуск контейнера
+---
+
+## 4. Запуск контейнера
+
 docker run -d -p 8000:80 --name apache2-php-mariadb apache2-php-mariadb
 
 📌 Контейнер запущен, сайт доступен:
 http://localhost:8000
 
-📸 Скрин: docker ps
+---
 
-5. Проверка Apache
+## 5. Проверка Apache
 
 Открыть в браузере:
-
 http://localhost:8000
 
 📌 Отображается Apache Default Page.
 
-📸 Скрин: Apache Default Page
+---
 
-6. Установка WordPress
+## 6. Установка WordPress
+
 cd /var/www/html
-
 curl -o wp.tar.gz https://wordpress.org/latest.tar.gz
-
 tar -xvzf wp.tar.gz
-
 mv wordpress/* .
-
 rm -rf wordpress wp.tar.gz
 
-📌 WordPress установлен в /var/www/html.
+📌 WordPress установлен в /var/www/html
 
-📸 Скрин: содержимое директории
+---
 
-7. Настройка базы данных MariaDB
+## 7. Настройка базы данных MariaDB
+
 CREATE DATABASE wordpress;
-
 CREATE USER 'wordpress'@'%' IDENTIFIED BY 'wordpress';
-
 GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'%';
-
 FLUSH PRIVILEGES;
 
 📌 Создана база данных и пользователь.
 
-📸 Скрин: MariaDB
+---
 
-8. Проверка подключения
+## 8. Проверка подключения
+
 mysql -u wordpress -p
 
 📌 Подключение к базе успешно.
 
-📸 Скрин: вход в MariaDB
+---
 
-9. Запуск WordPress
+## 9. Запуск WordPress
 
 http://localhost:8000
 
 📌 Появился мастер установки WordPress.
 
-📸 Скрин: установка WordPress
+---
 
-10. Завершение установки
+## 10. Завершение установки
 
-Заполнены данные:
-
-Site Title
-Username
-Password
-Email
+- Site Title  
+- Username  
+- Password  
+- Email  
 
 📌 WordPress успешно установлен.
 
-📸 Скрин: финальная установка
+---
 
-📊 Вывод
+# 📊 Вывод
 
 В ходе лабораторной работы:
-
-изучена работа Docker-контейнеров
-развернут веб-стек Apache + PHP + MariaDB
-установлена CMS WordPress
-создана база данных и пользователь
-выполнена настройка подключения
-получен практический опыт работы с контейнерами
+- изучена работа Docker-контейнеров  
+- развернут веб-стек Apache + PHP + MariaDB  
+- установлена CMS WordPress  
+- создана база данных и пользователь  
+- выполнена настройка подключения  
+- получен практический опыт работы с контейнерами  
